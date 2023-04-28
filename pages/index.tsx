@@ -7,6 +7,7 @@ import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
 import Post from '../interfaces/post'
+import globalStore from '../store/global';
 
 type Props = {
   allPosts: Post[]
@@ -15,6 +16,13 @@ type Props = {
 export default function Index({ allPosts }: Props) {
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)
+
+  if (globalStore.allPosts && globalStore.allPosts.length === 0) {
+    globalStore.setPosts(allPosts);
+  } else {
+    allPosts = globalStore.allPosts;
+  }
+
   return (
     <>
       <Layout>

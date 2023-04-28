@@ -31,5 +31,14 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  variants: {
+    extend: {
+      animation: ['motion-safe'],
+      borderColor: ['focus-visible'],
+      opacity: ['disabled'],
+    }
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
