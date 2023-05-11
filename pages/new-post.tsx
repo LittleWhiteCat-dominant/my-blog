@@ -8,12 +8,21 @@ import Head from 'next/head';
 import Layout from '../components/layout';
 import Button from '../components/button';
 import Container from '../components/container';
+import MarkdownEditor from '../components/markdown-editor';
+
+const DocumentStrSource = ''.replace(/([\s\S]*)<!--dividing-->/, '').replace(/^\n*/g, '');
+let count = 1;
 
 export default function NewPost() {
   const { globalStore } = useStore();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [name, setName] = useState('');
+  const [visible, setVisible] = useState(true);
+  const [mdstr, setMdstr] = useState<string>(DocumentStrSource);
+  const [hideToolbar, setHideToolbar] = useState(true);
+  const [toolbarBottom, setToolbarBottom] = useState(false);
+  const [enableScroll, setEnableScroll] = useState(true);
   const router = useRouter();
   const allPosts: Post[] = globalStore.allPosts
 
@@ -82,6 +91,39 @@ export default function NewPost() {
         </form>
         <Button text='Save Post' callback={handleSubmit}/>
       </Container>
+      <div>
+        <MarkdownEditor
+          visible={visible}
+          height="500px"
+          value={mdstr}
+          enableScroll={enableScroll}
+          hideToolbar={hideToolbar}
+          toolbarBottom={toolbarBottom}
+        />
+        <div style={{ marginTop: 10, display: 'flex', gap: '10px' }}>
+          <button
+            onClick={() => {
+              count += 1;
+              setMdstr(`String ${count}`);
+            }}
+          >
+            Modify Markdown
+          </button>
+          <label>
+            <input type="checkbox" checked={hideToolbar} onChange={(evn) => setHideToolbar(evn.target.checked)} />
+            hideToolbar
+          </label>
+          <label>
+            <input type="checkbox" checked={enableScroll} onChange={(evn) => setEnableScroll(evn.target.checked)} />
+            enableScroll
+          </label>
+          <label>
+            <input type="checkbox" checked={toolbarBottom} onChange={(evn) => setToolbarBottom(evn.target.checked)} />
+            toolbarBottom
+          </label>
+          <button onClick={() => setVisible(!visible)}>{visible ? 'Show' : 'Hide'}</button>
+        </div>
+      </div>
     </Layout>
   );
 }

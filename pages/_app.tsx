@@ -3,6 +3,9 @@ import { storeContext } from '../store/store';
 import globalStore from '../store/global';
 
 import '../styles/index.css'
+import '../styles/markdown.css';
+import '../styles/editor.css';
+import '../styles/toolbar.css';
 
 
 const store = {
