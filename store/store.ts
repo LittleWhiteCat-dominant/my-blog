@@ -1,12 +1,26 @@
-import { createContext, useContext } from 'react';
+import { create } from "zustand";
+import Navbar from "../interfaces/navbar";
+import Post from '../interfaces/post';
 
-export const storeContext = createContext(Object.create(null));
+const store = (set) => ({
+  // Sound
+  soundLevel: 1,
+  updateSoundLevel: (newValue: number) => set(() => ({ soundLevel: newValue })),
+  soundControlIsVisible: false,
+  toggleSoundControlVisibility: () =>
+    set((state) => ({ soundControlIsVisible: !state.soundControlIsVisible })),
 
-export const useStore = () => {
-  const store = useContext(storeContext);
-  if (!store) {
-      // this is especially useful in TypeScript so you don't need to be checking for null all the time
-      throw new Error('useStore must be used within a StoreProvider.');
-  }
-  return store;
-};
+  // Active nav btn
+  activeNav: "",
+  updateActiveNav: (newValue: string) => set(() => ({ activeNav: newValue })),
+  navList: [],
+  updateNavList: (newValue: Navbar[]) => set(() => ({ navList: newValue })),
+
+  // post
+  posts: [],
+  setPosts: (newValue: Post[]) => set({
+    posts: newValue
+  })
+});
+
+export const useStore = create(store);

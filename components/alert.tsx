@@ -2,20 +2,22 @@ import Container from './container'
 import cn from 'classnames'
 
 type Props = {
-  preview?: boolean
+  isAlert?: boolean,
+  alertText?: string
 }
 
-const Alert = ({ preview }: Props) => {
+const Alert = ({ isAlert, alertText }: Props) => {
   return (
     <div
       className={cn('border-b', {
-        'bg-neutral-800 border-neutral-800 text-white': preview,
-        'bg-neutral-50 border-neutral-200': !preview,
+        'bg-neutral-800 border-neutral-800 text-white': isAlert,
+        'bg-neutral-50 border-neutral-200': !isAlert,
       })}
+      hidden={!isAlert}
     >
       <Container>
         <div className="py-2 text-center text-sm">
-          {preview ? (
+          {/* {isAlert ? (
             <>
               This page is a preview.{' '}
               <a
@@ -30,7 +32,8 @@ const Alert = ({ preview }: Props) => {
             <>
               The source code for this blog is{' '}
             </>
-          )}
+          )} */}
+          { alertText }
         </div>
       </Container>
     </div>

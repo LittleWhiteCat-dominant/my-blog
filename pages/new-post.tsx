@@ -9,12 +9,23 @@ import Layout from '../components/layout';
 import Button from '../components/button';
 import Container from '../components/container';
 import MarkdownEditor from '../components/markdown-editor';
+import { shallow } from "zustand/shallow";
 
 const DocumentStrSource = ''.replace(/([\s\S]*)<!--dividing-->/, '').replace(/^\n*/g, '');
 let count = 1;
 
 export default function NewPost() {
-  const { globalStore } = useStore();
+  const [
+    posts,
+    setPosts,
+  ] = useStore(
+    (store) => [
+      store.posts,
+      store.setPosts,
+    ],
+    shallow
+  );
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [name, setName] = useState('');
@@ -24,7 +35,7 @@ export default function NewPost() {
   const [toolbarBottom, setToolbarBottom] = useState(false);
   const [enableScroll, setEnableScroll] = useState(true);
   const router = useRouter();
-  const allPosts: Post[] = globalStore.allPosts
+  const allPosts: Post[] = posts;
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -58,7 +69,7 @@ export default function NewPost() {
     };
     const totalPost = [...allPosts, newPost];
 
-    globalStore.setPosts(totalPost);
+    setPosts(totalPost);
 
     router.push('/');
   };

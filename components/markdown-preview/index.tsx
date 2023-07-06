@@ -1,5 +1,6 @@
 import React, { useImperativeHandle } from 'react';
 import ReactMarkdown, { Options } from 'react-markdown';
+import MarkNav from 'markdown-navbar'; 
 import { Element } from 'hast';
 import { PluggableList } from 'unified';
 import gfm from 'remark-gfm';
@@ -111,6 +112,14 @@ export default React.forwardRef<MarkdownPreviewRef, MarkdownPreviewProps>((props
         remarkPlugins={pluginsFilter ? pluginsFilter('remark', remarkPlugins) : remarkPlugins}
         children={source || ''}
       />
+      <div>
+        <MarkNav
+          className="toc-list"
+          source={source}
+          ordered={false}
+          declarative={true}
+        />
+      </div>
     </div>
   );
 });

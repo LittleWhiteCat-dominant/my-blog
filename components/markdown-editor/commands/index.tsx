@@ -8,9 +8,11 @@ import { underline } from './underline';
 import { olist } from './olist';
 import { ulist } from './ulist';
 import { quote } from './quote';
+import { linebreak } from './linebreak';
 import { link } from './link';
 import { todo } from './todo';
 import { image } from './image';
+import { table } from './table';
 import { redo } from './redo';
 import { undo } from './undo';
 import { fullscreen } from './fullscreen';
@@ -28,14 +30,13 @@ export type ICommand = {
 };
 
 export const defaultCommands = {
-  undo,
-  redo,
+  header,
   bold,
   italic,
-  header,
   strike,
   underline,
   quote,
+  linebreak,
   olist,
   ulist,
   todo,
@@ -43,6 +44,9 @@ export const defaultCommands = {
   image,
   code,
   codeBlock,
+  table,
+  undo,
+  redo,
   fullscreen,
   preview,
 };

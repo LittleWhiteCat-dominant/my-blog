@@ -42,8 +42,10 @@
     --color-neutral-muted: rgba(110, 118, 129, 0.4);
     --color-accent-fg: #58a6ff;
     --color-accent-emphasis: #1f6feb;
+    --color-accent-subtle: #757575;
     --color-attention-subtle: rgba(187, 128, 9, 0.15);
     --color-danger-fg: #f85149;
+    --color-bg-light: #f5f5f5;
   }
 }
 @media (prefers-color-scheme: light) {
@@ -90,8 +92,11 @@
     --color-neutral-muted: rgba(175, 184, 193, 0.2);
     --color-accent-fg: #0969da;
     --color-accent-emphasis: #0969da;
+    --color-accent-subtle: #757575;
+    --color-accent-default: #000000;
     --color-attention-subtle: #fff8c5;
     --color-danger-fg: #cf222e;
+    --color-bg-light: #f5f5f5;
   }
 }
 [data-color-mode*='dark'] .wmde-markdown,
@@ -140,6 +145,7 @@ body[data-color-mode*='dark'] {
   --color-neutral-muted: rgba(110, 118, 129, 0.4);
   --color-accent-fg: #58a6ff;
   --color-accent-emphasis: #1f6feb;
+  --color-accent-default: #000000;
   --color-attention-subtle: rgba(187, 128, 9, 0.15);
   --color-danger-fg: #f85149;
 }
@@ -895,27 +901,31 @@ body[data-color-mode*='light'] {
   right: 6px;
   border-radius: 5px;
   background: var(--color-border-default);
-  padding: 6px;
+  padding: 5px;
   font-size: 12px;
   transition: all 0.3s;
 }
 .wmde-markdown pre .copied .octicon-copy {
-  display: block;
+  display: flex;
+  width: 14px;
+  height: 14px
 }
 .wmde-markdown pre .copied .octicon-check {
   display: none;
+  width: 14px;
+  height: 14px
 }
 .wmde-markdown pre:hover .copied {
   visibility: visible;
 }
 .wmde-markdown pre:hover .copied:hover {
-  background: var(--color-prettylights-syntax-entity-tag);
-  color: var(--color-canvas-default);
+  background: #8b949e;
+  color: var(--color-accent-default);
 }
 .wmde-markdown pre:hover .copied:active,
 .wmde-markdown pre .copied.active {
-  background: #2e9b33;
-  color: var(--color-canvas-default);
+  /* background: #2e9b33; */
+  color: var(--color-accent-default);
 }
 .wmde-markdown pre .active .octicon-copy {
   display: none;

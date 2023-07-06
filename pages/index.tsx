@@ -1,64 +1,113 @@
-import Container from '../components/container'
-import MoreStories from '../components/more-stories'
-import HeroPost from '../components/hero-post'
-import Intro from '../components/intro'
-import Layout from '../components/layout'
-import { getAllPosts } from '../lib/api'
-import Head from 'next/head'
-import { CMS_NAME } from '../lib/constants'
-import Post from '../interfaces/post'
-import globalStore from '../store/global';
+import { lazy, useState, useEffect } from "react";
+import Container from "../components/container";
+import Layout from "../components/layout";
+import Post from "../interfaces/post";
+import Navbar from "../components/overlay/navbar";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Environment, Sky, Cloud } from "@react-three/drei";
+import * as THREE from "three";
+import { shallow } from "zustand/shallow";
+import { useStore } from "../store/store";
+
+import {
+  HiOutlineUsers,
+  HiOutlineDesktopComputer,
+  HiOutlineBookOpen,
+  HiOutlineChip,
+  HiOutlineCollection,
+} from "react-icons/hi";
+
+// Nav list
+const navigation = [
+  { title: "Home", icon: <HiOutlineBookOpen />, link: '/' },
+  { title: "Blog", icon: <HiOutlineUsers />, link: '/blog' },
+  { title: "Tools", icon: <HiOutlineChip />, link: '/tools' },
+  { title: "Portfolio", icon: <HiOutlineDesktopComputer />, link: '/portfolio' },
+  { title: "Me", icon: <HiOutlineCollection />, link: '/resume' },
+];
+
+const GLTFSuspense = lazy(() => import("../components/three/model"));
 
 type Props = {
-  allPosts: Post[]
-}
+  allPosts: Post[];
+};
 
-export default function Index({ allPosts }: Props) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+type Win = {
+  innerWidth: number;
+  innerHeight: number;
+};
 
-  if (globalStore.allPosts && globalStore.allPosts.length === 0) {
-    globalStore.setPosts(allPosts);
-  } else {
-    allPosts = globalStore.allPosts;
-  }
+export default function Index() {
+  const [windowSize, setWindowSize] = useState<Win>({
+    innerWidth: 0,
+    innerHeight: 0,
+  });
+
+  const [
+    navList,
+    updateNavList,
+    updateActiveNav
+  ] = useStore(
+    (store) => [
+      store.navList,
+      store.updateNavList,
+      store.updateActiveNav
+    ],
+    shallow
+  );
+
+  useEffect(function mount() {
+    const { innerWidth, innerHeight } = window;
+    setWindowSize({ innerWidth, innerHeight });
+    updateNavList(navigation);
+    updateActiveNav('Home');
+  }, []);
 
   return (
     <>
-      <Layout>
-        <Head>
-          <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
-        </Head>
+      <Layout isAlert={false}>
         <Container>
-          <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
+          <Canvas
+            scene={{
+              background: new THREE.Color(0xbfe3dd),
+            }}
+            camera={{
+              position: [5, 2, 8],
+              aspect: windowSize.innerWidth / windowSize.innerHeight,
+              fov: 40,
+              near: 1,
+              far: 100
+            }}
+            gl={{
+              antialias: true,
+            }}
+            onCreated={({ gl }) => {
+              gl.setPixelRatio(window.devicePixelRatio);
+              gl.setSize(window.innerWidth, window.innerHeight);
+            }}
+          >
+            <hemisphereLight intensity={0.45} />
+            <spotLight
+              angle={0.4}
+              penumbra={1}
+              position={[20, 30, 2.5]}
+              castShadow
+              shadow-bias={-0.00001}
             />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+            <directionalLight
+              color="red"
+              position={[-10, -10, 0]}
+              intensity={1.5}
+            />
+            <Cloud scale={1.5} position={[20, 0, 0]} />
+            <Cloud scale={1} position={[-20, 10, 0]} />
+            <Environment preset="sunset" />
+            <Sky />
+            <GLTFSuspense url={"/model/LittlestTokyo.glb"} />
+          </Canvas>
+          <Navbar navList={ navList } />
         </Container>
       </Layout>
     </>
-  )
-}
-
-export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
-  ])
-
-  return {
-    props: { allPosts },
-  }
+  );
 }
