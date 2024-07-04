@@ -1,10 +1,10 @@
 import React from "react";
-import Link from 'next/link'
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { AnimatePresence } from "framer-motion";
-
-import Navbar from "../../interfaces/navbar";
-
-import {  HiOutlineMusicNote } from "react-icons/hi";
+// Store
+import { shallow } from "zustand/shallow";
+import { useStore } from "../../store/store";
 
 // Mobile Nav
 import MobileNav from "./mobile-navbar";
@@ -12,38 +12,40 @@ import MobileNav from "./mobile-navbar";
 // Sound control
 import SoundControl from "./sound-control";
 
-// Store
-import { shallow } from "zustand/shallow";
-import { useStore } from "../../store/store";
+import {
+  HiOutlineUsers,
+  HiOutlineDesktopComputer,
+  HiOutlineBookOpen,
+  HiOutlineChip,
+  HiOutlineCollection,
+  HiOutlineMusicNote,
+} from "react-icons/hi";
 
-type Props = {
-  navList: Navbar[]
-}
+const navigation = [
+  { title: "Home", icon: <HiOutlineBookOpen />, link: "/" },
+  { title: "Blog", icon: <HiOutlineUsers />, link: "/blog" },
+  { title: "Tools", icon: <HiOutlineChip />, link: "/tools" },
+  {
+    title: "Project",
+    icon: <HiOutlineDesktopComputer />,
+    link: "/project",
+  },
+  { title: "Me", icon: <HiOutlineCollection />, link: "/resume" },
+];
 
-const Navbar = ({ navList }: Props) => {
+const Navbar = () => {
   // Get store values/functions
-  const [
-    soundLevel,
-    soundControlIsVisible,
-    toggleSoundControlVisibility,
-    activeNav,
-    updateActiveNav,
-  ] = useStore(
-    (store) => [
-      store.soundLevel,
-      store.soundControlIsVisible,
-      store.toggleSoundControlVisibility,
-      store.activeNav,
-      store.updateActiveNav,
-    ],
-    shallow
-  );
+  const [soundLevel, soundControlIsVisible, toggleSoundControlVisibility] =
+    useStore(
+      (store) => [
+        store.soundLevel,
+        store.soundControlIsVisible,
+        store.toggleSoundControlVisibility,
+      ],
+      shallow
+    );
 
-  const handleNavBtnClick = (title) => {
-    updateActiveNav(title);
-    // 跳转
-
-  };
+  const router = useRouter();
 
   return (
     <header className="header">
@@ -51,17 +53,14 @@ const Navbar = ({ navList }: Props) => {
         <nav className="navigation">
           {/* Sections navigation */}
           <ul>
-            {navList.map((navItem, index) => (
-              <li key={`${index}-navLink`}>
+            {navigation.map((navItem) => (
+              <li key={navItem.title}>
                 <button
-                  className={`${activeNav === navItem.title && "active"}`}
-                  onClick={() =>
-                    handleNavBtnClick(navItem.title)
+                  className={
+                    router.pathname === navItem.link ? "active" : "inactive"
                   }
                 >
-                  <Link href={navItem.link}>
-                    {navItem.title}
-                  </Link>
+                  <Link href={navItem.link}>{navItem.title}</Link>
                 </button>
               </li>
             ))}
@@ -78,9 +77,7 @@ const Navbar = ({ navList }: Props) => {
               <button
                 className={`sound_control ${soundLevel == 0 && "no-sound"}`}
                 aria-label="sound level control"
-                onClick={() =>
-                  toggleSoundControlVisibility()
-                }
+                onClick={() => toggleSoundControlVisibility()}
               >
                 <HiOutlineMusicNote />
               </button>
@@ -93,7 +90,7 @@ const Navbar = ({ navList }: Props) => {
         </nav>
 
         {/* Mobile menu */}
-        <MobileNav navList={navList} />
+        <MobileNav navList={navigation} />
       </div>
     </header>
   );

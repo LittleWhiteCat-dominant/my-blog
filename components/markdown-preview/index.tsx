@@ -1,6 +1,5 @@
-import React, { useImperativeHandle } from 'react';
+import React, { useImperativeHandle, useEffect, useState } from 'react';
 import ReactMarkdown, { Options } from 'react-markdown';
-import MarkNav from 'markdown-navbar'; 
 import { Element } from 'hast';
 import { PluggableList } from 'unified';
 import gfm from 'remark-gfm';
@@ -16,6 +15,8 @@ import { copyElement } from './nodes/copy';
 import { useCopied } from './plugins/useCopied';
 
 import { reservedMeta } from './plugins/reservedMeta';
+import { transitTagToLevel } from '@/utils/titleExtract';
+import Outline from '../post/outline';
 
 export interface MarkdownPreviewProps extends Omit<Options, 'children'> {
   prefixCls?: string;
@@ -37,6 +38,7 @@ export interface MarkdownPreviewProps extends Omit<Options, 'children'> {
   onScroll?: (e: React.UIEvent<HTMLDivElement>) => void;
   onMouseOver?: (e: React.MouseEvent<HTMLDivElement>) => void;
   rehypeRewrite?: RehypeRewriteOptions['rewrite'];
+  showOutline?: boolean;
 }
 
 export interface MarkdownPreviewRef extends MarkdownPreviewProps {
@@ -51,6 +53,7 @@ export default React.forwardRef<MarkdownPreviewRef, MarkdownPreviewProps>((props
     style,
     disableCopy = false,
     skipHtml = true,
+    showOutline = false,
     onScroll,
     onMouseOver,
     pluginsFilter,
@@ -59,6 +62,7 @@ export default React.forwardRef<MarkdownPreviewRef, MarkdownPreviewProps>((props
     warpperElement = {},
     ...other
   } = props;
+  const[heading, setHeading] = useState([]);
   const mdp = React.useRef<HTMLDivElement>(null);
   useImperativeHandle(ref, () => ({ ...props, mdp }), [mdp, props]);
   const cls = `${prefixCls || ''} ${className || ''}`;
@@ -102,23 +106,36 @@ export default React.forwardRef<MarkdownPreviewRef, MarkdownPreviewProps>((props
   }
   const remarkPlugins = [...(other.remarkPlugins || []), gfm];
   const wrapperProps = { ...warpperElement, ...wrapperElement };
+
+  useEffect(() => {
+    const headings = [];
+    const editorElement = document.getElementById("markdown-parent");
+    editorElement.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(heading => {
+      headings.push({
+        level: transitTagToLevel(heading.tagName),
+        title: heading.textContent,
+        id: heading.id
+      })
+    });
+    setHeading(headings);
+  }, []);
+
   return (
-    <div ref={mdp} onScroll={onScroll} onMouseOver={onMouseOver} {...wrapperProps} className={cls} style={style}>
-      <ReactMarkdown
-        {...customProps}
-        {...other}
-        skipHtml={skipHtml}
-        rehypePlugins={pluginsFilter ? pluginsFilter('rehype', rehypePlugins) : rehypePlugins}
-        remarkPlugins={pluginsFilter ? pluginsFilter('remark', remarkPlugins) : remarkPlugins}
-        children={source || ''}
-      />
-      <div>
-        <MarkNav
-          className="toc-list"
-          source={source}
-          ordered={false}
-          declarative={true}
-        />
+    <div id='markdown-parent' ref={mdp} onScroll={onScroll} onMouseOver={onMouseOver} {...wrapperProps} className={cls} style={style}>
+      <div className='xl:grid xl:grid-cols-4 xl:gap-x-6 bg-day border-2 border-day dark:border-night dark:bg-night bg-opacity-50 dark:bg-opacity-75'>
+        <div className='xl:col-span-3 xl:row-span-2 pt-10 pb-8 prose dark:prose-dark max-w-none'>
+          <ReactMarkdown
+            {...customProps}
+            {...other}
+            skipHtml={skipHtml}
+            rehypePlugins={pluginsFilter ? pluginsFilter('rehype', rehypePlugins) : rehypePlugins}
+            remarkPlugins={pluginsFilter ? pluginsFilter('remark', remarkPlugins) : remarkPlugins}
+            children={source || ''}
+          />
+        </div>
+        {
+          showOutline? <Outline headings={heading}/> : <></>
+        }
       </div>
     </div>
   );

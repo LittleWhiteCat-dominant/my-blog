@@ -6,3 +6,10 @@
 @import './editor.css';
 @import './toolbar.css';
 @import './overlay.css';
+@import './pixi.css';
+
+*, ::before, ::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: none;
+}

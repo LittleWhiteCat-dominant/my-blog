@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import Navbar from "../interfaces/navbar";
 import Post from '../interfaces/post';
 
 const store = (set) => ({
@@ -9,12 +8,6 @@ const store = (set) => ({
   soundControlIsVisible: false,
   toggleSoundControlVisibility: () =>
     set((state) => ({ soundControlIsVisible: !state.soundControlIsVisible })),
-
-  // Active nav btn
-  activeNav: "",
-  updateActiveNav: (newValue: string) => set(() => ({ activeNav: newValue })),
-  navList: [],
-  updateNavList: (newValue: Navbar[]) => set(() => ({ navList: newValue })),
 
   // post
   posts: [],

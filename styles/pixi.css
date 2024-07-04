@@ -1,0 +1,13 @@
+/* styles.module.css */
+#pixi-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* height: 100vh; */
+  }
+  
+.three-container {
+    height: 100vh !important;
+    margin-top: 200px;
+  }

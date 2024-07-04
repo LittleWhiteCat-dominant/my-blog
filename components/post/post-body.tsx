@@ -1,4 +1,5 @@
 import MarkdownPreview from '../markdown-preview';
+import * as React from "react";
 // import markdownStyles from './markdown-styles.module.css'
 
 type Props = {
@@ -13,8 +14,8 @@ const PostBody = ({ content }: Props) => {
         className={markdownStyles['markdown']}
         dangerouslySetInnerHTML={{ __html: content }}
       /> */}
-      <div className='md-editor wmde-markdown-var'>
-        <MarkdownPreview source={content} />
+      <div id="wmde-markdown-var" className='md-editor wmde-markdown-var'>
+        <MarkdownPreview source={content} showOutline={true}/>
       </div>
     </div>
   )

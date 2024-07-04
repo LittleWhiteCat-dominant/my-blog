@@ -1,5 +1,6 @@
 import React from "react";
-import Link from 'next/link'
+import Link from 'next/link';
+import { useRouter } from "next/router";
 
 // Icons
 import { HiOutlineMusicNote } from "react-icons/hi";
@@ -9,39 +10,28 @@ import { shallow } from "zustand/shallow";
 import { useStore } from "../../store/store";
 
 const MobileNav = ( { navList }) => {
+  const router = useRouter();
   // Get store values/functions
   const [
     soundLevel,
     toggleSoundControlVisibility,
-    activeNav,
-    updateActiveNav,
   ] = useStore(
     (store) => [
       store.soundLevel,
       store.toggleSoundControlVisibility,
-      store.activeNav,
-      store.updateActiveNav,
     ],
     shallow
   );
-
-  const handleNavBtnClick = (title, position) => {
-    updateActiveNav(title);
-    // todo
-  };
 
   return (
     <div className="mobile-nav-overlay">
       <nav className="mobile-nav">
         {/* Sections navigation */}
         <ul>
-          {navList.map((navItem, index) => (
-            <li key={`${index}-mobileNavLink`}>
+          {navList.map((navItem) => (
+            <li key={navItem.title}>
               <button
-                className={`${activeNav === navItem.title && "active"}`}
-                onClick={() =>
-                  handleNavBtnClick(navItem.title, navItem.position)
-                }
+                className={router.pathname === navItem.link? "active" : "inactive"}
                 aria-label={navItem.title}
               >
                 <Link href={navItem.link}>

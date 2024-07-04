@@ -11,6 +11,7 @@ header {
   left: 0;
   width: 100%;
   margin: 2rem 0 0 0;
+  z-index: 1000;
 }
 
 nav {
@@ -27,7 +28,7 @@ nav > ul {
 .navigation {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   column-gap: 5rem;
 }
 
@@ -46,13 +47,16 @@ button {
   text-transform: capitalize;
   letter-spacing: 1.6px;
   font-size: 1.35rem;
-
-  color: rgb(120, 120, 120);
+  color: rgb(20, 20, 20);
   background: none;
   border: none;
 }
 
 button.active {
+  color: rgb(0, 0, 0);;
+}
+
+button.inactive {
   color: rgb(164, 164, 164);
 }
 

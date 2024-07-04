@@ -28,7 +28,7 @@ const PostHeader = ({ title, coverImage, date, author }: Props) => {
           </div>
           <div className='grid grid-flow-col auto-cols-auto gap-x-4'>
             {
-              tags.map((tag) => <Tag name={tag} />)
+              tags.map((tag) => <Tag key={tag} name={tag} />)
             }
           </div>
         </div>
