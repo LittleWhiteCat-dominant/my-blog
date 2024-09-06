@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
-import ColonizationShip from "./colonizationShip";
+import ColonizationShip from "./ColonizationShip";
 import Rig from "./Rig";
 import LaserBeam from "./LaserBeam";
 import SpaceShip from "./SpaceShip";
