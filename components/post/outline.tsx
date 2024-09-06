@@ -5,12 +5,12 @@ import OutlineItem from "./outline-item";
 const HEADING_OFFSET = 20;
 
 type Props = {
-    headings: {
-        title: string;
-        level: number;
-        id: string;
-      }[];
-  }
+  headings: {
+    title: string;
+    level: number;
+    id: string;
+  }[];
+};
 
 const Outline = ({ headings }: Props) => {
   const [activeSlug, setActiveSlug] = React.useState<string>();
@@ -48,27 +48,30 @@ const Outline = ({ headings }: Props) => {
 
   return (
     <div className="hidden xl:block sticky top-4 xl:top-8 pt-10 pb-8 max-h-fit min-w-min min-h-fit overflow-y-auto rounded-sm">
-    <div className="text-xl font-semibold">{"On this page"}</div>
-    {headings.length ? (
-      <ul className="p-0 list-none">
-        {headings
-          .filter((heading) => heading.level < 4)
-          .map((heading) => (
-            <OutlineItem 
-              key={heading.id}
-              level={heading.level - headingAdjustment}
-              active={activeSlug === heading.id}
-              title={heading.title}
-              id={heading.id} />
-          ))}
-      </ul>
-    ) : (
-      <text style={{ fontSize: '14px', margin: '1em 0 4em', paddingRight: '2em'}}>
-        {"Headings you add to the document will appear here"}
-      </text>
-    )}
-  </div>
+      <div className="text-xl font-semibold">{"On this page"}</div>
+      {headings.length ? (
+        <ul className="p-0 list-none">
+          {headings
+            .filter((heading) => heading.level < 4)
+            .map((heading) => (
+              <OutlineItem
+                key={heading.id}
+                level={heading.level - headingAdjustment}
+                active={activeSlug === heading.id}
+                title={heading.title}
+                id={heading.id}
+              />
+            ))}
+        </ul>
+      ) : (
+        <div
+          style={{ fontSize: "14px", margin: "1em 0 4em", paddingRight: "2em" }}
+        >
+          {"Headings you add to the document will appear here"}
+        </div>
+      )}
+    </div>
   );
-  }
-  
-  export default Outline;
+};
+
+export default Outline;

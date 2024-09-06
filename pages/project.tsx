@@ -17,11 +17,26 @@ export default function Project() {
         <Intro title={"Professional Experience."} />
         <section className="p-10 mb-8 shadow-lg mx-auto">
           <p className="text-slate-500 mt-2 leading-relaxed">
-            I've embarked on numerous projects throughout the years, but these
-            are the ones I hold closest to my heart. Many of them are
-            open-source, so if you come across something that piques your
-            interest, feel free to explore the codebase and contribute your
-            ideas for further enhancements. Your collaboration is highly valued!
+            In my project work, I've led and contributed to a range of
+            initiatives that focus on practical and scalable solutions. I
+            developed a mobile application for inkjet printing in collaboration
+            with Huawei, which involved leading a team to create a
+            cross-platform app supporting LAN and cloud printing. This app now
+            serves millions of users. Another key project was the Deli EPlus
+            Android application, a platform I established from scratch and
+            enhanced over three years to support over 30 million users,
+            effectively managing office devices connected to a cloud-based
+            system.
+          </p>
+          <p className="text-slate-500 mt-2 leading-relaxed">
+            Additionally, I've implemented a web and mini-program for Deli
+            Printing aimed at providing a swift and convenient printing
+            experience for users. My technical efforts have consistently focused
+            on optimizing application performance, improving memory usage,
+            speed, power consumption, and user interaction across various
+            software solutions. These projects not only strengthened my
+            technical skills but also honed my ability to lead teams and manage
+            large-scale software developments effectively.
           </p>
 
           <div className="flex flex-wrap my-20 gap-16">
@@ -64,8 +79,6 @@ export default function Project() {
           </div>
 
           <hr className="border-slate-200" />
-
-          {/* <CTA /> */}
         </section>
       </Container>
     </Layout>

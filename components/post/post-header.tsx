@@ -1,20 +1,19 @@
-import Avatar from '../avatar'
-import Tag from '../tag'
-import DateFormatter from '../date-formatter'
-import CoverImage from '../cover-image'
-import PostTitle from './post-title'
-import type Author from '../../interfaces/author'
+import Avatar from "../avatar";
+import Tag from "../tag";
+import DateFormatter from "../date-formatter";
+import CoverImage from "../cover-image";
+import PostTitle from "./post-title";
+import type Author from "../../interfaces/author";
 
 type Props = {
-  title: string
-  coverImage: string
-  date: string
-  author: Author
-}
+  title: string;
+  coverImage: string;
+  date: string;
+  author: Author;
+  tags: string[];
+};
 
-const tags = ['React', 'next.js', 'Build', 'solid.js', 'zustand']
-
-const PostHeader = ({ title, coverImage, date, author }: Props) => {
+const PostHeader = ({ title, coverImage, date, author, tags }: Props) => {
   return (
     <>
       <PostTitle>{title}</PostTitle>
@@ -26,10 +25,10 @@ const PostHeader = ({ title, coverImage, date, author }: Props) => {
           <div className="mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
             <DateFormatter dateString={date} />
           </div>
-          <div className='grid grid-flow-col auto-cols-auto gap-x-4'>
-            {
-              tags.map((tag) => <Tag key={tag} name={tag} />)
-            }
+          <div className="grid grid-flow-col auto-cols-auto gap-x-4">
+            {tags?.map((tag) => (
+              <Tag key={tag} name={tag} />
+            ))}
           </div>
         </div>
       </section>
@@ -44,7 +43,7 @@ const PostHeader = ({ title, coverImage, date, author }: Props) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PostHeader
+export default PostHeader;
