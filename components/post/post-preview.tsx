@@ -31,8 +31,8 @@ const PostPreview = ({
           slug={slug}
           title={title}
           src={coverImage}
-          width="96"
-          height="52"
+          width="100%"
+          height="150px"
         />
       </div>
       <div className="flex justify-between items-center mb-4">

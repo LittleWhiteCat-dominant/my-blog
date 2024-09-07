@@ -26,7 +26,6 @@ const eplus = '/assets/icons/eplus.png';
 const oneplus = '/assets/icons/oneplus.png';
 const huawei = '/assets/icons/huawei.webp';
 const neoway = '/assets/icons/neoway.png';
-const neoway2 = '/assets/icons/neoway2.png';
 const express = '/assets/icons/express.svg';
 const android = '/assets/icons/android.svg';
 const java = '/assets/icons/java.svg';
@@ -67,5 +66,4 @@ export {
     java,
     kotlin,
     docker,
-    neoway2
 }

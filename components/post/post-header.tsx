@@ -34,7 +34,12 @@ const PostHeader = ({ title, coverImage, date, author, tags }: Props) => {
       </section>
       <div className="border-t-2">
         <div className="my-8 mx-auto md:w-3/4">
-          <CoverImage title={title} src={coverImage} />
+          <CoverImage
+            title={title}
+            src={coverImage}
+            width="100%"
+            height="100%"
+          />
         </div>
       </div>
       <div className="max-w-2xl mx-auto">

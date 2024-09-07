@@ -1,4 +1,5 @@
 import { projects } from "../components/constants";
+import { arrow } from "@/public/assets/icons/index";
 import Layout from "../components/layout";
 import Navbar from "../components/overlay/navbar";
 import Container from "../components/container";
@@ -68,7 +69,7 @@ export default function Project() {
                       Link
                     </Link>
                     <img
-                      src="/assets/icons/arrow.svg"
+                      src={arrow}
                       alt="arrow"
                       className="w-4 h-4 object-contain"
                     />

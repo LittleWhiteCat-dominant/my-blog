@@ -8,7 +8,7 @@ author:
   picture: "/assets/blog/authors/jj.jpeg"
 ogImage:
   url: "/assets/blog/seo-optimize/cover.jpg"
-tags: ["SEO", "Web Design"]
+tags: ["seo", "webdesign"]
 ---
 
 # What is SEO web design?
