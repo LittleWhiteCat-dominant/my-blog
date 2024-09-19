@@ -53,7 +53,7 @@ button {
 }
 
 button.active {
-  color: rgb(0, 0, 0);;
+  color: rgb(0, 0, 0);
 }
 
 button.inactive {
@@ -81,21 +81,6 @@ button.inactive {
   height: 3px;
   width: 110%;
   background: rgb(164, 164, 164);
-}
-
-/* For screens less than 700px */
-@media only screen and (max-width: 700px) {
-  .navigation > ul {
-    display: none;
-  }
-
-  .mobile-nav-overlay {
-    display: block;
-  }
-
-  button {
-    text-transform: uppercase;
-  }
 }
 
 .mobile-nav-overlay {
@@ -175,4 +160,17 @@ input[type="range"]::-webkit-slider-thumb:active {
   transform: scale(1);
 }
 
+/* For screens less than 700px */
+@media only screen and (max-width: 700px) {
+  .navigation > ul {
+    display: none;
+  }
 
+  .mobile-nav-overlay {
+    display: block;
+  }
+
+  button {
+    text-transform: uppercase;
+  }
+}
