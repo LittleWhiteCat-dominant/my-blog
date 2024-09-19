@@ -163,7 +163,7 @@ export const experiences = [
   },
   {
     title: "Web Developer & React Native Developer",
-    company_name: "Deli Group",
+    company_name: "Deli Group.",
     icon: deli,
     iconBg: "#a2d2ff",
     date: "September 2021 - August 2023",

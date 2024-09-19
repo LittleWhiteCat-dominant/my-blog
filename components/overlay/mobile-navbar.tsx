@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'next/link';
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 // Icons
@@ -9,17 +9,11 @@ import { HiOutlineMusicNote } from "react-icons/hi";
 import { shallow } from "zustand/shallow";
 import { useStore } from "../../store/store";
 
-const MobileNav = ( { navList }) => {
+const MobileNav = ({ navList }) => {
   const router = useRouter();
   // Get store values/functions
-  const [
-    soundLevel,
-    toggleSoundControlVisibility,
-  ] = useStore(
-    (store) => [
-      store.soundLevel,
-      store.toggleSoundControlVisibility,
-    ],
+  const [soundLevel, toggleSoundControlVisibility] = useStore(
+    (store) => [store.soundLevel, store.toggleSoundControlVisibility],
     shallow
   );
 
@@ -31,12 +25,12 @@ const MobileNav = ( { navList }) => {
           {navList.map((navItem) => (
             <li key={navItem.title}>
               <button
-                className={router.pathname === navItem.link? "active" : "inactive"}
+                className={
+                  router.pathname === navItem.link ? "active" : "inactive"
+                }
                 aria-label={navItem.title}
               >
-                <Link href={navItem.link}>
-                  {navItem.icon}
-                </Link>
+                <Link href={navItem.link}>{navItem.icon}</Link>
               </button>
             </li>
           ))}
@@ -53,9 +47,7 @@ const MobileNav = ( { navList }) => {
             <button
               className={`sound_control ${soundLevel == 0 && "no-sound"}`}
               aria-label="sound level control"
-              onClick={() =>
-                toggleSoundControlVisibility()
-              }
+              onClick={() => toggleSoundControlVisibility()}
             >
               <HiOutlineMusicNote />
             </button>
