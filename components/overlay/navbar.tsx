@@ -24,7 +24,7 @@ import {
 const navigation = [
   { title: "Home", icon: <HiOutlineBookOpen />, link: "/" },
   { title: "Blog", icon: <HiOutlineUsers />, link: "/blog" },
-  { title: "Tools", icon: <HiOutlineChip />, link: "/tools" },
+  // { title: "Tools", icon: <HiOutlineChip />, link: "/tools" },
   {
     title: "Project",
     icon: <HiOutlineDesktopComputer />,

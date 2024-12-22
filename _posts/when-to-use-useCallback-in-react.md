@@ -1,5 +1,5 @@
 ---
-title: "Reasons Why CSS Media Queries May Not Work"
+title: "When to Use `useCallback` in React"
 excerpt: "`useCallback` does not need to be used for every function. Overusing it can add unnecessary overhead. Its primary purpose is to return the same function reference when dependencies remain unchanged."
 coverImage: "/assets/blog/when-to-use-useCallback/cover.jpg"
 date: "2024-12-20T05:35:07.322Z"
@@ -11,7 +11,7 @@ ogImage:
 tags: ["React"]
 ---
 
-When to Use `useCallback` in React
+Many people know that use `useCallback` in React can optimize performance by memoizing functions. However, not every function needs to be wrapped in `useCallback`. Overusing `useCallback` can add unnecessary overhead to your project.
 
 ## Not Every Function Needs `useCallback`
 
