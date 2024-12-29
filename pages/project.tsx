@@ -1,7 +1,6 @@
 import { projects } from "../components/constants";
 import { arrow } from "@/public/assets/icons/index";
 import Layout from "../components/layout";
-import Navbar from "../components/overlay/navbar";
 import Container from "../components/container";
 import Link from "next/link";
 import Head from "next/head";
@@ -10,14 +9,13 @@ import Intro from "../components/intro";
 export default function Project() {
   return (
     <Layout>
-      <Navbar />
       <Head>
-        <title>My Projects</title>
+        <title>Ian's Projects</title>
       </Head>
       <Container>
         <Intro title={"Professional Experience."} />
-        <section className="p-10 mb-8 shadow-lg mx-auto">
-          <p className="text-slate-500 mt-2 leading-relaxed">
+        <section className="mx-auto mb-8 p-10 shadow-lg">
+          <p className="mt-2 leading-relaxed text-slate-500">
             In my project work, I've led and contributed to a range of
             initiatives that focus on practical and scalable solutions. I
             developed a mobile application for inkjet printing in collaboration
@@ -29,7 +27,7 @@ export default function Project() {
             effectively managing office devices connected to a cloud-based
             system.
           </p>
-          <p className="text-slate-500 mt-2 leading-relaxed">
+          <p className="mt-2 leading-relaxed text-slate-500">
             Additionally, I've implemented a web and mini-program for Deli
             Printing aimed at providing a swift and convenient printing
             experience for users. My technical efforts have consistently focused
@@ -40,12 +38,12 @@ export default function Project() {
             large-scale software developments effectively.
           </p>
 
-          <div className="flex flex-wrap my-20 gap-16">
+          <div className="my-20 flex flex-wrap gap-16">
             {projects.map((project) => (
-              <div className="lg:w-[400px] w-full" key={project.name}>
-                <div className="block-container w-12 h-12">
+              <div className="w-full lg:w-[400px]" key={project.name}>
+                <div className="block-container h-12 w-12">
                   <div className={`btn-back rounded-xl ${project.theme}`} />
-                  <div className="btn-front rounded-xl flex justify-center items-center">
+                  <div className="btn-front flex items-center justify-center rounded-xl">
                     <img
                       src={project.iconUrl}
                       alt="threads"
@@ -55,11 +53,11 @@ export default function Project() {
                 </div>
 
                 <div className="mt-5 flex flex-col">
-                  <h4 className="text-2xl font-poppins font-semibold">
+                  <h4 className="font-poppins text-2xl font-semibold">
                     {project.name}
                   </h4>
                   <p className="mt-2 text-slate-500">{project.description}</p>
-                  <div className="mt-5 flex items-center gap-2 font-poppins">
+                  <div className="font-poppins mt-5 flex items-center gap-2">
                     <Link
                       href={project.link}
                       target="_blank"
@@ -71,7 +69,7 @@ export default function Project() {
                     <img
                       src={arrow}
                       alt="arrow"
-                      className="w-4 h-4 object-contain"
+                      className="h-4 w-4 object-contain"
                     />
                   </div>
                 </div>

@@ -6,7 +6,6 @@ import Intro from "../components/intro";
 import Layout from "../components/layout";
 import { getAllPosts } from "../lib/api";
 import Head from "next/head";
-import { CMS_NAME } from "../lib/constants";
 import Post from "../interfaces/post";
 import { useStore } from "../store/store";
 import Navbar from "../components/overlay/navbar";
@@ -34,7 +33,7 @@ export default function Blog({ allPosts }: Props) {
       <Layout>
         <Navbar />
         <Head>
-          <title>{`Blog with ${CMS_NAME}`}</title>
+          <title>Ian's Blog</title>
         </Head>
         <Container>
           <Intro title={"Blog."} />

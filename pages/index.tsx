@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Navbar from "../components/overlay/navbar";
+import Head from "next/head";
 
 import Home from "@/components/home";
 
@@ -22,7 +22,9 @@ export default function Index() {
   return (
     <>
       <main>
-        <Navbar />
+        <Head>
+          <title>Ian's Portfolio</title>
+        </Head>
         <Home />
       </main>
     </>
