@@ -1,6 +1,6 @@
 ---
-title: 'Capstone Secure Medical Record System'
-excerpt: "This document outlines the development of a secure medical record management system utilizing Hyperledger Fabric for blockchain functionalities, Java for chaincode, Spring Boot for backend services, and React with NextUI for the frontend."
+title: 'Developing a Secure Medical Record System Using Hyperledger Fabric'
+excerpt: "This document outlines the development of a secure medical record management system."
 coverImage: '/assets/blog/preview/cover.jpg'
 date: '2024-09-25T02:35:07.322Z'
 author:
@@ -10,8 +10,6 @@ ogImage:
   url: "/assets/blog/media-query-failed/cover.jpg"
 tags: ["blackchain"]
 ---
-# Developing a Secure Medical Record System Using Hyperledger Fabric with Enhanced Encryption and Improved Access Control
-
 
 ## Overview
 This document outlines the development of a secure medical record management system utilizing Hyperledger Fabric for blockchain functionalities, Java for chaincode, Spring Boot for backend services, and React with NextUI for the frontend.
