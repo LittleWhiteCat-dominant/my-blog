@@ -6,10 +6,10 @@ type Props = {
 
 const PostTitle = ({ children }: Props) => {
   return (
-    <h1 className="text-5xl sm:text-4xl lg:text-6xl font-bold tracking-normal leading-tight sm:leading-10 mb-12 text-center md:text-left">
+    <h1 className="mb-12 text-center text-5xl font-bold leading-tight tracking-normal sm:text-4xl sm:leading-10 md:text-left lg:text-6xl">
       {children}
     </h1>
-  )
+  );
 }
 
 export default PostTitle

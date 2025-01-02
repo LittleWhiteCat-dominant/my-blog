@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { createWithEqualityFn } from 'zustand/traditional';
 import Post from '../interfaces/post';
 
 const store = (set) => ({
@@ -16,4 +16,4 @@ const store = (set) => ({
   })
 });
 
-export const useStore = create(store);
+export const useStore = createWithEqualityFn(store);

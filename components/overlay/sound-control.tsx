@@ -1,7 +1,9 @@
-import React from "react";
-
+import React, { use, useEffect } from "react";
 // Animation
 import { motion } from "framer-motion";
+// Store
+import { shallow } from "zustand/shallow";
+import { useStore } from "../../store/store";
 
 export const control = {
   hidden: {
@@ -16,19 +18,38 @@ export const control = {
   },
 };
 
-// Store
-import { shallow } from "zustand/shallow";
-import { useStore } from "../../store/store";
-
-const index = () => {
+const index = React.memo(() => {
   // Get store values/functions
-  const [soundLevel, updateSoundLevel] = useStore(
+  const [
+    soundLevel,
+    updateSoundLevel,
+    soundControlIsVisible,
+    toggleSoundControlVisibility,
+  ] = useStore(
     (store) => [
       store.soundLevel,
       store.updateSoundLevel,
+      store.soundControlIsVisible,
+      store.toggleSoundControlVisibility,
     ],
-    shallow
+    shallow,
   );
+
+  const lastChange = React.useRef(Date.now());
+  console.log("lastChange.current1:", lastChange.current);
+
+  useEffect(() => {
+    if (soundControlIsVisible) {
+      const timeout = setTimeout(() => {
+        console.log("lastChange.current2:", lastChange.current);
+        console.log("Date.now():", Date.now());
+        if (Date.now() - lastChange.current > 5000) {
+          toggleSoundControlVisibility();
+        }
+      }, 5000);
+      return () => clearTimeout(timeout);
+    }
+  }, [soundControlIsVisible, lastChange.current]);
 
   return (
     <motion.div
@@ -45,10 +66,14 @@ const index = () => {
         max="10"
         value={soundLevel}
         step="1"
-        onChange={(e) => updateSoundLevel(Number(e.target.value))}
+        onChange={(e) => {
+          updateSoundLevel(Number(e.target.value));
+          console.log("lastChange.current3:", lastChange.current);
+          lastChange.current = Date.now();
+        }}
       />
     </motion.div>
   );
-};
+});
 
 export default index;

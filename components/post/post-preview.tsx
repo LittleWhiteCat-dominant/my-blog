@@ -25,7 +25,7 @@ const PostPreview = ({
   tags,
 }: Props) => {
   return (
-    <div className="block rounded-lg bg-transparent ease-in-out hover:scale-105 duration-500">
+    <div className="block rounded-lg bg-transparent duration-500 ease-in-out hover:scale-105">
       <div className="mb-5">
         <CoverImage
           slug={slug}
@@ -35,13 +35,13 @@ const PostPreview = ({
           height="150px"
         />
       </div>
-      <div className="flex justify-between items-center mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <div className="text-sm font-semibold">
           <DateFormatter dateString={date} />
         </div>
         <Tag name={tags !== undefined ? tags[0] : ""} />
       </div>
-      <h3 className="text-2xl md:text-xl font-bold mb-3 leading-snug">
+      <h3 className="mb-3 text-2xl font-bold leading-snug md:text-xl">
         <Link
           as={`/posts/${slug}`}
           href="/posts/[slug]"
@@ -50,7 +50,7 @@ const PostPreview = ({
           {title}
         </Link>
       </h3>
-      <p className="text-sm leading-relaxed mb-4 text-gray-600 tracking-wider">
+      <p className="mb-4 text-sm leading-relaxed tracking-wider text-gray-600">
         {excerpt}
       </p>
       <Avatar name={author.name} picture={author.picture} />

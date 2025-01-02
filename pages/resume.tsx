@@ -18,7 +18,7 @@ const Resume = () => {
         <title>Ian's Resume</title>
       </Head>
       <Container>
-        <Intro title={"Professional Experience."} />
+        <Intro title={"About Me."} />
         <section className="max-container">
           <h1 className="head-text">
             Hello, I'm{" "}

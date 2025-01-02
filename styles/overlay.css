@@ -1,8 +1,8 @@
 .container {
-  max-width: 1140px;
   width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
+  position: relative; 
 }
 
 header {
@@ -86,10 +86,10 @@ button.inactive {
 .mobile-nav-overlay {
   display: none;
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
-  border-radius: 1rem;
+  height: 100vh;
   background: rgb(27, 33, 30);
   background: linear-gradient(
     132deg,
@@ -101,21 +101,56 @@ button.inactive {
 }
 
 .mobile-nav {
-  display: flex;
-  align-items: center;
-  margin: 1rem 2rem 2rem 2rem;
-  row-gap: 3rem;
+  float: right;
+  margin: 1rem 2rem 1rem 1rem;
+  background-color:rgba(240, 236, 236, 0.929);
+  border-radius: 0.2rem;
+  padding: 1.5rem;
 }
 
 .mobile-nav > ul {
-  width: 100%;
+  display: block;
   align-items: center;
   justify-content: space-between;
+  column-gap: 5rem;
+  width: 10rem;
 }
 
 .mobile-nav > ul:nth-of-type(2) {
   width: 6rem;
   justify-content: flex-end;
+}
+
+.mobile-nav > ul > li {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.mobile-nav > ul > li:nth-child(1) {
+  margin: 0;
+}
+
+.mobile-nav-toggle {
+  display: none;
+  position: absolute;
+  right: 2rem;
+  top: 0;
+}
+
+.mobile-nav-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  padding: 0 1rem;
+  background: rgb(164, 164, 164);
+  margin: 1rem 0;
 }
 
 svg {
@@ -136,6 +171,11 @@ svg {
   font-size: 12px;
   transform: translate(0, 3rem);
   transform-origin: 100% 50%;
+  z-index: 10000;
+}
+
+.hidden {
+  display: none !important; /* 确保隐藏 */
 }
 
 input[type="range"] {
@@ -166,7 +206,7 @@ input[type="range"]::-webkit-slider-thumb:active {
     display: none;
   }
 
-  .mobile-nav-overlay {
+  .mobile-nav-toggle {
     display: block;
   }
 

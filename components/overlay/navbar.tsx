@@ -12,25 +12,17 @@ import MobileNav from "./mobile-navbar";
 // Sound control
 import SoundControl from "./sound-control";
 
-import {
-  HiOutlineUsers,
-  HiOutlineDesktopComputer,
-  HiOutlineBookOpen,
-  HiOutlineChip,
-  HiOutlineCollection,
-  HiOutlineMusicNote,
-} from "react-icons/hi";
+import { HiOutlineMusicNote } from "react-icons/hi";
 
 const navigation = [
-  { title: "Home", icon: <HiOutlineBookOpen />, link: "/" },
-  { title: "Blog", icon: <HiOutlineUsers />, link: "/blog" },
-  // { title: "Tools", icon: <HiOutlineChip />, link: "/tools" },
+  { title: "Home", link: "/" },
+  { title: "Blog", link: "/blog" },
+  // { title: "Tools", icon: <HiOutlineCode />, link: "/tools" },
   {
     title: "Project",
-    icon: <HiOutlineDesktopComputer />,
     link: "/project",
   },
-  { title: "Me", icon: <HiOutlineCollection />, link: "/resume" },
+  { title: "Me", link: "/resume" },
 ];
 
 const Navbar = () => {

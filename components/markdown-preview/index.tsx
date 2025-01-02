@@ -121,21 +121,35 @@ export default React.forwardRef<MarkdownPreviewRef, MarkdownPreviewProps>((props
   }, []);
 
   return (
-    <div id='markdown-parent' ref={mdp} onScroll={onScroll} onMouseOver={onMouseOver} {...wrapperProps} className={cls} style={style}>
-      <div className='xl:grid xl:grid-cols-4 xl:gap-x-6 bg-day border-2 border-day dark:border-night dark:bg-night bg-opacity-50 dark:bg-opacity-75'>
-        <div className='xl:col-span-3 xl:row-span-2 pt-10 pb-8 prose dark:prose-dark max-w-none'>
+    <div
+      id="markdown-parent"
+      ref={mdp}
+      onScroll={onScroll}
+      onMouseOver={onMouseOver}
+      {...wrapperProps}
+      className={cls}
+      style={style}
+    >
+      <div className="bg-day border-day dark:border-night dark:bg-night border-2 bg-opacity-50 xl:grid xl:grid-cols-4 xl:gap-x-6 dark:bg-opacity-75">
+        <div className="prose dark:prose-dark max-w-none pb-8 pt-10 xl:col-span-3 xl:row-span-2">
           <ReactMarkdown
             {...customProps}
             {...other}
             skipHtml={skipHtml}
-            rehypePlugins={pluginsFilter ? pluginsFilter('rehype', rehypePlugins) : rehypePlugins}
-            remarkPlugins={pluginsFilter ? pluginsFilter('remark', remarkPlugins) : remarkPlugins}
-            children={source || ''}
+            rehypePlugins={
+              pluginsFilter
+                ? pluginsFilter("rehype", rehypePlugins)
+                : rehypePlugins
+            }
+            remarkPlugins={
+              pluginsFilter
+                ? pluginsFilter("remark", remarkPlugins)
+                : remarkPlugins
+            }
+            children={source || ""}
           />
         </div>
-        {
-          showOutline? <Outline headings={heading}/> : <></>
-        }
+        {showOutline ? <Outline headings={heading} /> : <></>}
       </div>
     </div>
   );

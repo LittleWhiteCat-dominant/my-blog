@@ -16,18 +16,26 @@ const Footer = () => {
               Write Documentation
             </Link>
           </div> */}
-        <div className="flex flex-row flex-wrap items-center justify-center py-8 md:justify-between">
+        <div className="flex flex-row flex-wrap items-center justify-center py-8 sm:justify-between">
           <div className="flex space-x-2 text-sm text-black dark:text-gray-950">
             <div>@ 2024</div>
             <div>Ian Zhang</div>
             <a href="/">Ian's Blog</a>
           </div>
-          <div className="flex space-x-2 text-sm text-black dark:text-gray-950">
-            <a target="_blank" rel="noopener noreferrer" href="https://github.com/LittleWhiteCat-dominant">
+          <div className="flex space-x-2 pl-10 text-sm text-black sm:pl-0 dark:text-gray-950">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/LittleWhiteCat-dominant"
+            >
               GitHub
             </a>
             <div>·</div>
-            <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jie-zhang-927218120/">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.linkedin.com/in/jie-zhang-927218120/"
+            >
               Linkedin
             </a>
           </div>
