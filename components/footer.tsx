@@ -18,7 +18,7 @@ const Footer = () => {
           </div> */}
         <div className="flex flex-row flex-wrap items-center justify-center py-8 sm:justify-between">
           <div className="flex space-x-2 text-sm text-black dark:text-gray-950">
-            <div>@ 2024</div>
+            <div>@ 2025</div>
             <div>Ian Zhang</div>
             <a href="/">Ian's Blog</a>
           </div>

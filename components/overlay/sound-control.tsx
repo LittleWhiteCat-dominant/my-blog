@@ -5,19 +5,6 @@ import { motion } from "framer-motion";
 import { shallow } from "zustand/shallow";
 import { useStore } from "../../store/store";
 
-export const control = {
-  hidden: {
-    y: -24,
-    opacity: 0,
-  },
-  show: { y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.5 } },
-  exit: {
-    y: -24,
-    opacity: 0,
-    transition: { duration: 0.5 },
-  },
-};
-
 const index = React.memo(() => {
   // Get store values/functions
   const [
@@ -36,13 +23,23 @@ const index = React.memo(() => {
   );
 
   const lastChange = React.useRef(Date.now());
-  console.log("lastChange.current1:", lastChange.current);
+
+  const overlayVariants = {
+    hidden: {
+      y: -24,
+      opacity: 0,
+    },
+    show: { y: 0, opacity: 1, transition: { duration: 0.5, delay: 0.5 } },
+    exit: {
+      y: -24,
+      opacity: 0,
+      transition: { duration: 0.5 },
+    },
+  };
 
   useEffect(() => {
     if (soundControlIsVisible) {
       const timeout = setTimeout(() => {
-        console.log("lastChange.current2:", lastChange.current);
-        console.log("Date.now():", Date.now());
         if (Date.now() - lastChange.current > 5000) {
           toggleSoundControlVisibility();
         }
@@ -53,7 +50,7 @@ const index = React.memo(() => {
 
   return (
     <motion.div
-      variants={control}
+      variants={overlayVariants}
       key="control"
       initial="hidden"
       animate="show"
@@ -68,7 +65,6 @@ const index = React.memo(() => {
         step="1"
         onChange={(e) => {
           updateSoundLevel(Number(e.target.value));
-          console.log("lastChange.current3:", lastChange.current);
           lastChange.current = Date.now();
         }}
       />

@@ -39,52 +39,71 @@ const Navbar = () => {
 
   const router = useRouter();
 
+  const isPathInNavigation = navigation.some(
+    (navItem) => navItem.link === router.pathname,
+  );
+
   return (
-    <header className="header">
-      <div className="container">
-        <nav className="navigation">
-          {/* Sections navigation */}
-          <ul>
-            {navigation.map((navItem) => (
-              <li key={navItem.title}>
-                <button
-                  className={
-                    router.pathname === navItem.link ? "active" : "inactive"
-                  }
-                >
-                  <Link href={navItem.link}>{navItem.title}</Link>
-                </button>
-              </li>
-            ))}
-          </ul>
+    <>
+      {isPathInNavigation && (
+        <header className="header">
+          <div className="container">
+            <nav className="navigation">
+              {/* Sections navigation */}
+              <ul>
+                {navigation.map((navItem) => (
+                  <li key={navItem.title}>
+                    <button
+                      className={
+                        router.pathname === navItem.link ? "active" : "inactive"
+                      }
+                    >
+                      <Link href={navItem.link}>{navItem.title}</Link>
+                    </button>
+                  </li>
+                ))}
+              </ul>
 
-          {/* Theme toggler & Sound Level Control */}
-          <ul>
-            {/* <li>
-              <button aria-label="theme toggler">
-                <HiOutlineSun />
-              </button>
-            </li> */}
-            <li>
-              <button
-                className={`sound_control ${soundLevel == 0 && "no-sound"}`}
-                aria-label="sound level control"
-                onClick={() => toggleSoundControlVisibility()}
-              >
-                <HiOutlineMusicNote />
-              </button>
-            </li>
-          </ul>
-          {/* Sound Control */}
-          <AnimatePresence>
-            {soundControlIsVisible && <SoundControl />}
-          </AnimatePresence>
-        </nav>
+              {/* Theme toggler & Sound Level Control */}
+              <ul>
+                {/* <li>
+                  <button aria-label="theme toggler">
+                    <HiOutlineSun />
+                  </button>
+                </li> */}
+                {soundLevel > 1000 && (
+                  <li>
+                    <button
+                      className={`sound_control ${soundLevel == 0 && "no-sound"}`}
+                      aria-label="sound level control"
+                      onClick={() => toggleSoundControlVisibility()}
+                    >
+                      <HiOutlineMusicNote />
+                    </button>
+                  </li>
+                )}
+                {/* <li>
+                  <button
+                    className={`sound_control ${soundLevel == 0 && "no-sound"}`}
+                    aria-label="sound level control"
+                    onClick={() => toggleSoundControlVisibility()}
+                  >
+                    <HiOutlineMusicNote />
+                  </button>
+                </li> */}
+              </ul>
+              {/* Sound Control */}
+              <AnimatePresence>
+                {soundControlIsVisible && <SoundControl />}
+              </AnimatePresence>
+            </nav>
 
-        {/* Mobile menu */}
-        <MobileNav navList={navigation} />
-      </div>
-    </header>
+            {/* Mobile menu */}
+            <MobileNav navList={navigation} />
+          </div>
+        </header>
+      )}
+    </>
   );
 };
 

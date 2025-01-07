@@ -47,10 +47,10 @@ const Outline = ({ headings }: Props) => {
   const headingAdjustment = minHeading - 1;
 
   return (
-    <div className="hidden xl:block sticky top-4 xl:top-8 pt-10 pb-8 max-h-fit min-w-min min-h-fit overflow-y-auto rounded-sm">
+    <div className="sticky top-4 hidden max-h-fit min-h-fit min-w-min overflow-y-auto rounded-sm pb-8 pt-10 xl:top-8 xl:!block">
       <div className="text-xl font-semibold">{"On this page"}</div>
       {headings.length ? (
-        <ul className="p-0 list-none">
+        <ul className="list-none p-0">
           {headings
             .filter((heading) => heading.level < 4)
             .map((heading) => (

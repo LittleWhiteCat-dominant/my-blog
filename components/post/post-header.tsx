@@ -18,7 +18,7 @@ const PostHeader = ({ title, coverImage, date, author, tags }: Props) => {
     <>
       <PostTitle>{title}</PostTitle>
       <section className="flex w-full flex-row place-content-between items-center gap-4 md:mb-4">
-        <div className="hidden md:block">
+        <div className="hidden md:!block">
           <Avatar name={author.name} picture={author.picture} />
         </div>
         <div className="flex flex-col items-start md:items-end">

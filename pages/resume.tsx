@@ -1,17 +1,35 @@
+"use client";
+
+import React from "react";
+import dynamic from "next/dynamic";
+import Head from "next/head";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import { experiences, skills } from "../components/constants";
 import "react-vertical-timeline-component/style.min.css";
+
+import { experiences } from "../components/constants";
 
 import Layout from "../components/layout";
 import Container from "../components/container";
-import Link from "next/link";
-import Head from "next/head";
 import Intro from "../components/intro";
 
-const Resume = () => {
+const DynamicSkill = dynamic(
+  () => import("../components/resume/dynamic-skill"),
+  {
+    ssr: false,
+  },
+);
+
+const DynamicIntro = dynamic(
+  () => import("../components/resume/dynamic-intro"),
+  {
+    ssr: false,
+  },
+);
+
+const Resume = ({ componentRef }) => {
   return (
     <Layout>
       <Head>
@@ -19,14 +37,8 @@ const Resume = () => {
       </Head>
       <Container>
         <Intro title={"About Me."} />
-        <section className="max-container">
-          <h1 className="head-text">
-            Hello, I'm{" "}
-            <span className="blue-gradient_text font-semibold drop-shadow">
-              {" "}
-              Ian
-            </span>{" "}
-          </h1>
+        <section ref={componentRef} className="max-container">
+          <DynamicIntro />
 
           <div className="mt-5 flex flex-col gap-3 text-slate-500">
             <p>
@@ -49,12 +61,16 @@ const Resume = () => {
             </p>
           </div>
 
-          <div className="flex flex-col py-10">
+          {/* <div className="flex flex-col py-10">
             <h3 className="subhead-text">My Skills</h3>
 
             <div className="mt-16 flex flex-wrap gap-12">
               {skills.map((skill) => (
-                <div className="block-container h-20 w-20" key={skill.name}>
+                <div
+                  key={skill.name}
+                  className="skill-row block-container h-20 w-20"
+                  aria-label={skill.name || ""}
+                >
                   <div className="btn-back rounded-xl" />
                   <div className="btn-front flex items-center justify-center rounded-xl">
                     <img
@@ -66,10 +82,12 @@ const Resume = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
+
+          <DynamicSkill />
 
           <div className="py-16">
-            <h3 className="subhead-text">Work Experience.</h3>
+            <h3 className="subhead-text text-xl">Work Experience.</h3>
             <div className="mt-5 flex flex-col gap-3 text-slate-500">
               <p>
                 I've worked with all sorts of companies, such as global
